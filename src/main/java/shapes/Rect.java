@@ -1,4 +1,5 @@
-import javax.swing.*;
+package shapes;
+
 import java.awt.*;
 
 public class Rect extends Shape {
