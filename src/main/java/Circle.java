@@ -1,14 +1,13 @@
 import java.awt.*;
 
-public class Circle {
+public class Circle extends Shape {
     private int radius;
-    private Point position;
-    private Color color;
+
     public Circle(int radius, Point position, Color color) {
+        super(position, color);
         this.radius = radius;
-        this.position = position;
-        this.color = color;
     }
+    @Override
     public void  draw(Graphics g) {
         g.setColor(color);
         g.fillOval(position.x - radius, position.y - radius, 2 * radius, 2 * radius);
