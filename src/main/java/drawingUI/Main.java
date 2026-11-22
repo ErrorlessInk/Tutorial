@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
 
-            // 1. Create window and drawing panel
+            // 1.Create window and drawing panel
             JFrame frame = new JFrame("Shape Studio");
             Drawing drawing = new Drawing();
 
