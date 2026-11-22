@@ -3,8 +3,8 @@ package shapes;
 import java.awt.*;
 
 public abstract class Shape {
-    protected Point position;
-    protected Color color;
+    protected final Point position;
+    protected final Color color;
 
     public Shape(Point position, Color color) {
         this.position = position;
