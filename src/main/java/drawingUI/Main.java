@@ -1,7 +1,9 @@
+package drawingUI;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import shapes.Drawing;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class Main {
             JPanel controls = new JPanel(new GridLayout(2, 1));
 
             JComboBox<String> choice = new JComboBox<>(
-                    new String[]{"Circle", "Rect", "Square"});
+                    new String[]{"Circle", "Rect", "Square","Triangle"});
 
             JSlider sizeSlider = new JSlider(10, 100, 30);
             JSlider widthSlider = new JSlider(10, 200, 60);
@@ -57,8 +59,16 @@ public class Main {
             actions.add(clear);
             actions.add(undo);
 
-            clear.addActionListener(e -> drawing.clearShapes());
-            undo.addActionListener(e -> drawing.undoLast());
+            undo.setEnabled(drawing.canUndo());
+
+            clear.addActionListener(e -> {
+                drawing.clearShapes();
+                undo.setEnabled(drawing.canUndo());
+            });
+
+            undo.addActionListener(e -> {
+                drawing.undo();
+            });
 
             // 7. Mouse listener
             drawing.addMouseListener(new MouseAdapter() {
@@ -74,12 +84,16 @@ public class Main {
 
                     } else if ("Rect".equals(selected)) {
                         drawing.addRect(
-                                size, width, e.getPoint(), chosenColor[0]);
+                                width, size, e.getPoint(), chosenColor[0]);
 
                     } else if ("Square".equals(selected)) {
                         drawing.addSquare(
                                 size, e.getPoint(), chosenColor[0]);
+                    }else if ("Triangle".equals(selected)) {
+                        drawing.addTriangle(
+                                size, e.getPoint(), chosenColor[0]);
                     }
+                    undo.setEnabled(drawing.canUndo());
                 }
             });
 
